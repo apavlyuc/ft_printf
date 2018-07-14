@@ -1,13 +1,20 @@
-#pragma once
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/14 14:46:39 by apavlyuc          #+#    #+#             */
+/*   Updated: 2018/07/14 15:45:35 by apavlyuc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef FT_PRINTF
 #define FT_PRINTF
 
 #include <stdarg.h>
 #include <wchar.h>
-#include <iostream>
-using std::cout;
-using std::endl;
 
 typedef struct s_flags
 {
@@ -69,7 +76,7 @@ int			read_type(const char **string, t_param *param);
 
 //	handlers
 int			handle_s(char **dst, va_list *args, t_param *param);
-int			handle_S(char **dst, va_list *args, t_param *param);
+int			handle_ls(char **dst, va_list *args, t_param *param);
 
 
 //	helpers

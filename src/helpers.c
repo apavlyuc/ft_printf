@@ -1,4 +1,16 @@
-#include "ft_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apavlyuc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/14 15:00:13 by apavlyuc          #+#    #+#             */
+/*   Updated: 2018/07/14 15:08:35 by apavlyuc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "inc/ft_printf.h"
 
 int			get_length(const char *string)
 {
@@ -7,7 +19,6 @@ int			get_length(const char *string)
 	length = 0;
 	while (*(string + length))
 		length++;
-
 	return (length);
 }
 
@@ -19,7 +30,7 @@ int			get_text_len(const char *string)
 	while (*(string + len))
 	{
 		if (*(string + len) == '%')
-			break;
+			break ;
 		++len;
 	}
 	return (len);
@@ -31,14 +42,12 @@ int			get_number_len(long long int number)
 
 	if (number == 0)
 		return (1);
-
 	len = 0;
 	while (number)
 	{
 		number /= 10;
 		len++;
 	}
-
 	return (len);
 }
 
@@ -62,13 +71,10 @@ void		init_param(t_param *param)
 	param->flags.plus = 0;
 	param->flags.space = 0;
 	param->flags.zero = 0;
-
 	param->width.width = 0;
 	param->width.asterisk = 0;
-
 	param->accuracy.accuracy = -1;
 	param->accuracy.asterisk = 0;
-
 	param->specificator.h = 0;
 	param->specificator.hh = 0;
 	param->specificator.j = 0;

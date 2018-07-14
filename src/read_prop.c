@@ -1,6 +1,17 @@
-#include <cstdlib>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_prop.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/14 15:01:32 by apavlyuc          #+#    #+#             */
+/*   Updated: 2018/07/14 15:43:15 by apavlyuc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdlib.h>
+#include "inc/ft_printf.h"
 
 int			update_param(const char **string, va_list *args, t_param *param)
 {
@@ -82,16 +93,14 @@ int			read_accuracy(const char **string, va_list *args, t_param *param)
 
 int			read_specificator(const char **string, t_param *param)
 {
-	int len;
+	int		len;
 
 	len = 0;
-	if (**string == 'h' || **string == 'l' || **string == 'j' || **string == 'z')
+	if (**string == 'h' || **string == 'l' || **string == 'j' ||
+		**string == 'z')
 		len = 1;
-	if (**string == 'h' && *(*string + 1) == 'h')
-	{
+	if (**string == 'h' && *(*string + 1) == 'h' && (len = 2))
 		param->specificator.hh = 1;
-		len = 2;
-	}
 	else if (**string == 'l' && *(*string + 1) == 'l')
 	{
 		param->specificator.ll = 1;
