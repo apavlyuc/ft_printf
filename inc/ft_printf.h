@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:46:39 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/14 15:45:35 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/14 21:19:01 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <stdarg.h>
 #include <wchar.h>
+#include <locale.h>
 
 typedef struct s_flags
 {
@@ -76,14 +77,16 @@ int			read_type(const char **string, t_param *param);
 
 //	handlers
 int			handle_s(char **dst, va_list *args, t_param *param);
-int			handle_ls(char **dst, va_list *args, t_param *param);
+size_t		handle_ls(char **dst, va_list *args, t_param *param);
 
 
 //	helpers
 int			get_length(const char *string); // len from current position to '\0'
+size_t		get_wlength(wchar_t *wstring); // len from current position to '\0'
 int			get_text_len(const char *string); // len from current position to '%'
 int			get_number_len(long long int number);
 void		fill(char *dst, char c, int len);
+void		wchar_to_char(char **dst, wchar_t *src, int lp, int ls);
 void		init_param(t_param *param);
 
 #endif // !FT_PRINTF

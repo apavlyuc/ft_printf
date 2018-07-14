@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:00:13 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/14 18:48:42 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/14 19:45:05 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			get_number_len(long long int number)
 	return (len);
 }
 
-int			get_wlength(wchar_t *str)
+size_t			get_wlength(wchar_t *str)
 {
 	size_t	len;
 
