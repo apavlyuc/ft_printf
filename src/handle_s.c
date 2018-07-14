@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:58:25 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/14 15:54:05 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/14 18:37:57 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static int	get_param_s_len(t_param *param, int init_len)
 	return (len);
 }
 
+
 int			handle_s(char **dst, va_list *args, t_param *param)
 {
 	char	*string;
@@ -67,7 +68,7 @@ int			handle_s(char **dst, va_list *args, t_param *param)
 	if (param->specificator.l == 1)
 		return (handle_ls(dst, args, param));
 	string = va_arg(*args, char*);
-	// string = string == NULL ? (char *)"null" : string;
+	string = string == NULL ? (char *)"(null)" : string;
 	len = get_param_s_len(param, get_length(string));
 	*dst = (char *)malloc(sizeof(char) * (len + 1));
 	fill(*dst, ' ', len);
