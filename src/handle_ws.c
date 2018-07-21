@@ -6,81 +6,111 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:36:20 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/14 21:22:35 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/21 22:24:50 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include "inc/ft_printf.h"
 
-static void		change_values(int *accurecy, size_t step1, size_t *len, size_t step2)
+static void	insert_wchar(char *dst, wchar_t src, int byte)
 {
-	*accurecy += (int)step1;
-	*len += (int)step2;
+	if (byte == 1)
+		*(dst) = (char)src;
+	else if (byte == 2)
+	{
+		*(dst) = (char)((src >> 6) + 0xC0);
+		*(dst + 1) = (char)((src & 0x3F) + 0x80);
+	}
+	else if (byte == 3)
+	{
+		*(dst) = (char)((src >> 12) + 0xE0);
+		*(dst + 1) = (char)(((src >> 6) & 0x3F) + 0x80);
+		*(dst + 2) = (char)((src & 0x3F) + 0x80);
+	}
+	else if (byte == 4)
+	{
+		*(dst) = (char)((src >> 18) + 0xF0);
+		*(dst + 1) = (char)(((src >> 12) & 0x3F) + 0x80);
+		*(dst + 2) = (char)(((src >> 6) & 0x3F) + 0x80);
+		*(dst + 3) = (char)((src & 0x3F) + 0x80);
+	}
+	write(1, dst, byte);
 }
 
-static size_t	get_param_sl_len(wchar_t *string, int accuracy, t_param *param)
+static int		get_param_sl_len(wchar_t *string, t_param *param, int *spaces)
 {
-	size_t		len;
+	int			len;
+	int			symbols;
+	int			tmp;
 
-	len = 0;
-	while (*string != '\0' && accuracy > 0)
-	{
-		if (*string <= 0x7F)
-			change_values(&accuracy, -1, &len, 1);
-		else if (*string <= 0x7FF && accuracy >= 2)
-			change_values(&accuracy, -2, &len, 2);
-		else if (*string <= 0xFFFF && accuracy >= 3)
-			change_values(&accuracy, -3, &len, 3);
-		else if (*string <= 0x10FFFF && accuracy >= 4)
-			change_values(&accuracy, -4, &len, 4);
-		else
-			break ;
-		string++;
-	}
-	if (param->accuracy.accuracy > -1)
-		len = (len < (size_t)param->accuracy.accuracy) ? len : param->accuracy.accuracy;
-	len = (size_t)param->width.width > len ? param->width.width : len;
+	symbols = param->accuracy.accuracy < 0 ? get_wlength(string) : param->accuracy.accuracy; // symbols count
+	tmp = get_bytes_in_wstr(string, symbols);
+	len = param->width.width < tmp ? tmp : param->width.width;
+	*spaces = param->width.width - tmp < 0 ? 0 : param->width.width - tmp;
 	return (len);
 }
 
-static void		insert(char **dst, wchar_t *src, t_param *param)
+static int		insert(char *dst, wchar_t *src, int spaces, int accuracy)
 {
-	size_t		len_string;
-	size_t		len_param;
+	int			i;
+	int			ret;
 
-	len_param = 0;
-	while (*(*dst + len_param))
-		len_param++;
-	len_string = param->accuracy.accuracy < 0 ? get_wlength(src) :
-	get_param_sl_len(src, param->accuracy.accuracy, param);
-	len_param--;
-	len_string--;
-	wchar_to_char(dst, src, len_param, len_string);
+	ret = 0;
+	while (spaces-- > 0)
+		write(1, " ", 1);
+	spaces = accuracy >= 0 ? 0 : 1;
+	while (*src && (spaces || accuracy >= get_bytes_in_wstr(src, 1)))
+	{
+		if (*src <= 0x7F)
+			i = 1;
+		else if (*src <= 0x7FF)
+			i = 2;
+		else if (*src <= 0xFFFF)
+			i = 3;
+		else if (*src <= 0x10FFFF)
+			i = 4;
+		insert_wchar(dst, *src, i);
+		accuracy -= get_bytes_in_wstr(src, 1);
+		src++;
+		dst += i;
+	}
+	while (accuracy >= 0 && accuracy < get_bytes_in_wstr(src, 1))
+	{
+		write(1, " ", 1);
+		accuracy--;
+	}
+	return (ret);
 }
 
-static void		rinsert(char **dst, wchar_t *src, t_param *param)
+static int		rinsert(char **dst, wchar_t *src, t_param *param)
 {
 	(void)dst;
 	(void)src;
 	(void)param;
+
+	return (0);
 }
 
-size_t			handle_ls(char **dst, va_list *args, t_param *param)
+int				handle_ls(char **dst, va_list *args, t_param *param)
 {
 	wchar_t		*string;
-	size_t		len;
+	int			len;
+	int			spaces;
+	int			ret;
 
 	string = va_arg(*args, wchar_t*);
 	string = string == NULL ? (wchar_t *)L"(null)" : string;
-	len = param->accuracy.accuracy < 0 ? get_wlength(string) :
-	get_param_sl_len(string, param->accuracy.accuracy, param);
+	len = get_param_sl_len(string, param, &spaces);
 	*dst = (char *)malloc(sizeof(char) * (len + 1));
 	fill(*dst, ' ', len);
 	if (param->flags.minus == 0)
-		insert(dst, string, param);
+		ret = insert((*dst + spaces), string, spaces, param->accuracy.accuracy);
 	else
-		rinsert(dst, string, param);
+		ret = rinsert(dst, string, param);
+	
+	**dst = '\0';
 	return (len);
 }

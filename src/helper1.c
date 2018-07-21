@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:00:13 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/14 19:45:05 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/21 21:06:18 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ int			get_length(const char *string)
 
 	length = 0;
 	while (*(string + length))
+		length++;
+	return (length);
+}
+
+int			get_wlength(const wchar_t *string)
+{
+	int		length;
+
+	length = 0;
+	while (*(string + length) != '\0')
 		length++;
 	return (length);
 }
@@ -51,22 +61,23 @@ int			get_number_len(long long int number)
 	return (len);
 }
 
-size_t			get_wlength(wchar_t *str)
+int			 get_bytes_in_wstr(const wchar_t *wstring, int count)
 {
-	size_t	len;
+	int	len;
 
 	len = 0;
-	while (*str)
+	while (*wstring && count > 0)
 	{
-		if (*str <= 0x7F)
+		if (*wstring <= 0x7F)
 			len++;
-		else if (*str <= 0x7FF)
+		else if (*wstring <= 0x7FF)
 			len += 2;
-		else if (*str <= 0xFFFF)
+		else if (*wstring <= 0xFFFF)
 			len += 3;
-		else if (*str <= 0x10FFFF)
+		else if (*wstring <= 0x10FFFF)
 			len += 4;
-		str++;
+		wstring++;
+		count--;
 	}
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:50:21 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/14 15:55:41 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/21 14:54:24 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int			print_param(const char **string, va_list *args)
 	if (ret < 0)
 		return (-1);
 	ret = create_param(&dst, args, &param);
-	// printf("%d", get_length(dst));
 	write(1, dst, get_length(dst));
 	free(dst);
 	return (ret);
