@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:46:39 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/21 18:58:19 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/24 18:47:16 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int			handle_ls(char **dst, va_list *args, t_param *param);
 //	helpers
 int			get_length(const char *string); // len from current position to '\0'
 int			get_wlength(const wchar_t *wstring); // len from current position to '\0'
+int			get_symbols_count(const wchar_t *string, int accuracy);
 int			get_bytes_in_wstr(const wchar_t *wstring, int count);
 int			get_text_len(const char *string); // len from current position to '%'
 int			get_number_len(long long int number);
