@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:36:20 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/24 19:45:14 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/24 20:11:12 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,13 @@ static int		get_param_sl_len(wchar_t *string, t_param *param, int *spaces, int *
 	return (len);
 }
 
-static int		insert(char *dst, wchar_t *src, int spaces, int accuracy)
+static void		insert(char *dst, wchar_t *src, int spaces, int symbols)
 {
 	int			i;
-	int			ret;
 
-	ret = 0;
 	while (spaces-- > 0)
 		write(1, " ", 1);
-	spaces = accuracy >= 0 ? 0 : 1;
-	while (*src && (spaces || accuracy >= get_bytes_in_wstr(src, 1)))
+	while (*src && symbols > 0)
 	{
 		if (*src <= 0x7F)
 			i = 1;
@@ -72,20 +69,17 @@ static int		insert(char *dst, wchar_t *src, int spaces, int accuracy)
 		else if (*src <= 0x10FFFF)
 			i = 4;
 		insert_wchar(dst, *src, i);
-		accuracy -= get_bytes_in_wstr(src, 1);
+		symbols--;
 		src++;
 		dst += i;
 	}
-	return (ret);
 }
 
-static int		rinsert(char **dst, wchar_t *src, t_param *param)
+static void		rinsert(char *dst, wchar_t *src, int spaces, int symbols)
 {
-	(void)dst;
-	(void)src;
-	(void)param;
-
-	return (0);
+	insert(dst, src, 0, symbols);
+	while (spaces-- > 0)
+		write(1, " ", 1);
 }
 
 int				handle_ls(char **dst, va_list *args, t_param *param)
@@ -101,9 +95,9 @@ int				handle_ls(char **dst, va_list *args, t_param *param)
 	*dst = (char *)malloc(sizeof(char) * (len + 1));
 	fill(*dst, ' ', len);
 	if (param->flags.minus == 0)
-		insert((*dst + spaces), string, spaces, param->accuracy.accuracy);
+		insert(*dst, string, spaces, symbols);
 	else
-		rinsert(dst, string, param);
+		rinsert(*dst, string, spaces, symbols);
 	**dst = '\0';
 	return (len);
 }
