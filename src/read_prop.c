@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:01:32 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/28 17:01:18 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/28 18:25:58 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ int			read_width(const char **string, va_list *args, t_param *param)
 	if (**string == '*')
 	{
 		param->width.asterisk = 1;
-		param->width.width = va_arg(*args, int);
+		if ((param->width.width = va_arg(*args, int)) < 0)
+		{
+			param->width.width *= -1;
+			param->flags.minus = 1;
+		}
 		++(*string);
 	}
 	else
@@ -112,13 +116,9 @@ int			read_type(const char **string, t_param *param)
 		**string != 'U' && **string != 'x' && **string != 'X' &&
 		**string != 'c' && **string != 'C')
 		return (-1);
-	if (**string == 'S')
-	{
-		param->type = 's';
+	if (**string == 'S' || **string == 'C')
 		param->specificator.l = 1;
-	}
-	else
-		param->type = **string;
+	param->type = **string;
 	++(*string);
 	return (1);
 }

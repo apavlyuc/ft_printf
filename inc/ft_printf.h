@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:46:39 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/24 20:56:04 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/28 17:31:11 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int					read_type(const char **str, t_param *param);
 
 int					handle_s(char **dst, va_list *args, t_param *param);
 int					handle_ls(char **dst, va_list *args, t_param *param);
+int					handle_c(char **dst, va_list *args, t_param *param);
+int					handle_lc(char **dst, va_list *args, t_param *param);
 
 int					get_length(const char *string);
 int					get_wlength(const wchar_t *wstring);
