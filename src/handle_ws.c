@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:36:20 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/24 20:11:12 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/28 16:58:26 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <sys/types.h>
 #include "inc/ft_printf.h"
 
-static void	insert_wchar(char *dst, wchar_t src, int byte)
+static void		insert_wchar(char *dst, wchar_t src, int byte)
 {
 	if (byte == 1)
 		*(dst) = (char)src;
@@ -40,15 +40,15 @@ static void	insert_wchar(char *dst, wchar_t src, int byte)
 	write(1, dst, byte);
 }
 
-static int		get_param_sl_len(wchar_t *string, t_param *param, int *spaces, int *symbols)
+static int		get_param_sl_len(wchar_t *str, t_param *p, int *sp, int *smb)
 {
 	int			len;
 	int			bytes;
 
-	*symbols = get_symbols_count(string, param->accuracy.accuracy);
-	bytes = get_bytes_in_wstr(string, *symbols); // bytes in ${symbols}
-	len = param->width.width < bytes ? bytes : param->width.width; // min bytes count for output
-	*spaces = len - bytes > 0 ? (len - bytes) : 0;
+	*smb = get_symbols_count(str, p->accuracy.accuracy);
+	bytes = get_bytes_in_wstr(str, *smb);
+	len = p->width.width < bytes ? bytes : p->width.width;
+	*sp = len - bytes > 0 ? (len - bytes) : 0;
 	return (len);
 }
 

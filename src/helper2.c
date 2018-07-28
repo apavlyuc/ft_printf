@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 18:10:41 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/21 19:33:33 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/28 17:01:12 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,35 @@ void		fill(char *dst, char c, int len)
 		++i;
 	}
 	*(dst + len) = '\0';
+}
+
+int			get_number_len(long long int number)
+{
+	int		len;
+
+	if (number == 0)
+		return (1);
+	len = 0;
+	while (number)
+	{
+		number /= 10;
+		len++;
+	}
+	return (len);
+}
+
+int			update_param(const char **string, va_list *args, t_param *param)
+{
+	int ret;
+
+	ret = 0;
+	init_param(param);
+	ret += read_flags(string, param);
+	ret += read_width(string, args, param);
+	ret += read_accuracy(string, args, param);
+	ret += read_specificator(string, param);
+	ret += read_type(string, param);
+	return (ret == 5 ? 5 : -1);
 }
 
 void		init_param(t_param *param)

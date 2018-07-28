@@ -6,89 +6,83 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:46:39 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/24 18:47:16 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/24 20:56:04 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF
-#define FT_PRINTF
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# include <stdarg.h>
+# include <wchar.h>
+# include <locale.h>
 
-#include <stdarg.h>
-#include <wchar.h>
-#include <locale.h>
-
-typedef struct s_flags
+typedef struct		s_flags
 {
-	char	minus;
-	char	plus;
-	char	space;
-	char	hash;
-	char	zero;
-} t_flags;
+	char			minus;
+	char			plus;
+	char			space;
+	char			hash;
+	char			zero;
+}					t_flags;
 
-typedef struct s_width
+typedef struct		s_width
 {
-	int		width;
-	char	asterisk;
-} t_width;
+	int				width;
+	char			asterisk;
+}					t_width;
 
-typedef struct s_accuracy
+typedef struct		s_accuracy
 {
-	int		accuracy;
-	char	asterisk;
-} t_accuracy;
+	int				accuracy;
+	char			asterisk;
+}					t_accuracy;
 
-typedef struct s_specificator
+typedef struct		s_specificator
 {
-	char h;
-	char hh;
-	char l;
-	char ll;
-	char j;
-	char z;
-} t_specificator;
+	char			h;
+	char			hh;
+	char			l;
+	char			ll;
+	char			j;
+	char			z;
+}					t_specificator;
 
-typedef struct s_param
+typedef struct		s_param
 {
 	t_flags			flags;
 	t_width			width;
 	t_accuracy		accuracy;
 	t_specificator	specificator;
 	char			type;
-} t_param;
+}					t_param;
 
-int			ft_printf(const char *string, ...);
+int					ft_printf(const char *str, ...);
 
-//	print data
-int			print_text(const char **string);
+int					print_text(const char **str);
 
-int			print_param(const char **string, va_list *args);
-int			parse_param(const char **string, va_list *args, t_param *param);
-int			create_param(char **dst, va_list *args, t_param *param);
+int					print_param(const char **str, va_list *args);
+int					parse_param(const char **str, va_list *args, t_param *p);
+int					create_param(char **dst, va_list *args, t_param *param);
 
-//	init @param with actual info
-int			update_param(const char **string, va_list *args, t_param *param);
+int					update_param(const char **str, va_list *args, t_param *p);
 
-int			read_flags(const char **string, t_param *param);
-int			read_width(const char **string, va_list *args, t_param *param);
-int			read_accuracy(const char **string, va_list *args, t_param *param);
-int			read_specificator(const char **string, t_param *param);
-int			read_type(const char **string, t_param *param);
+int					read_flags(const char **str, t_param *param);
+int					read_width(const char **str, va_list *args, t_param *param);
+int					read_accuracy(const char **str, va_list *args, t_param *p);
+int					read_specificator(const char **str, t_param *param);
+int					read_type(const char **str, t_param *param);
 
-//	handlers
-int			handle_s(char **dst, va_list *args, t_param *param);
-int			handle_ls(char **dst, va_list *args, t_param *param);
+int					handle_s(char **dst, va_list *args, t_param *param);
+int					handle_ls(char **dst, va_list *args, t_param *param);
 
+int					get_length(const char *string);
+int					get_wlength(const wchar_t *wstring);
+int					get_symbols_count(const wchar_t *string, int accuracy);
+int					get_bytes_in_wstr(const wchar_t *wstring, int count);
+int					get_text_len(const char *string);
+int					get_number_len(long long int number);
+void				fill(char *dst, char c, int len);
+void				wchar_to_char(char **dst, wchar_t *src, int lp, int ls);
+void				init_param(t_param *param);
 
-//	helpers
-int			get_length(const char *string); // len from current position to '\0'
-int			get_wlength(const wchar_t *wstring); // len from current position to '\0'
-int			get_symbols_count(const wchar_t *string, int accuracy);
-int			get_bytes_in_wstr(const wchar_t *wstring, int count);
-int			get_text_len(const char *string); // len from current position to '%'
-int			get_number_len(long long int number);
-void		fill(char *dst, char c, int len);
-void		wchar_to_char(char **dst, wchar_t *src, int lp, int ls);
-void		init_param(t_param *param);
-
-#endif // !FT_PRINTF
+#endif

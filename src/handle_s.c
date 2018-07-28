@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:58:25 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/14 20:20:16 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/24 20:59:26 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static int	get_param_s_len(t_param *param, int init_len)
 	len = (param->width.width > init_len) ? param->width.width : init_len;
 	return (len);
 }
-
 
 int			handle_s(char **dst, va_list *args, t_param *param)
 {

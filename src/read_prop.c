@@ -6,26 +6,12 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:01:32 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/14 15:43:15 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/28 17:01:18 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "inc/ft_printf.h"
-
-int			update_param(const char **string, va_list *args, t_param *param)
-{
-	int ret;
-
-	ret = 0;
-	init_param(param);
-	ret += read_flags(string, param);
-	ret += read_width(string, args, param);
-	ret += read_accuracy(string, args, param);
-	ret += read_specificator(string, param);
-	ret += read_type(string, param);
-	return (ret == 5 ? 5 : -1);
-}
 
 int			read_flags(const char **string, t_param *param)
 {

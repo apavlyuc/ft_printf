@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:00:13 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/24 19:15:56 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/24 20:58:27 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,9 @@ int			get_text_len(const char *string)
 	return (len);
 }
 
-int			get_number_len(long long int number)
+int			get_bytes_in_wstr(const wchar_t *wstring, int count)
 {
 	int		len;
-
-	if (number == 0)
-		return (1);
-	len = 0;
-	while (number)
-	{
-		number /= 10;
-		len++;
-	}
-	return (len);
-}
-
-int			 get_bytes_in_wstr(const wchar_t *wstring, int count)
-{
-	int	len;
 
 	len = 0;
 	while (*wstring && count > 0)
@@ -89,7 +74,7 @@ int			get_symbols_count(const wchar_t *string, int accuracy)
 	if (accuracy == -1)
 		return (get_wlength(string));
 	ret = 0;
-	while (*string != '\0' && accuracy > 0) // 11
+	while (*string != '\0' && accuracy > 0)
 	{
 		accuracy -= get_bytes_in_wstr(string, 1);
 		ret++;
