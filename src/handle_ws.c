@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:36:20 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/28 16:58:26 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/28 19:05:00 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int		get_param_sl_len(wchar_t *str, t_param *p, int *sp, int *smb)
 	*smb = get_symbols_count(str, p->accuracy.accuracy);
 	bytes = get_bytes_in_wstr(str, *smb);
 	len = p->width.width < bytes ? bytes : p->width.width;
-	*sp = len - bytes > 0 ? (len - bytes) : 0;
+	*sp = (len - bytes) > 0 ? (len - bytes) : 0;
 	return (len);
 }
 
