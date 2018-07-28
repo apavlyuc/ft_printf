@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 18:10:41 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/28 17:01:12 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/28 17:03:32 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		fill(char *dst, char c, int len)
 int			get_number_len(long long int number)
 {
 	int		len;
-
+ы
 	if (number == 0)
 		return (1);
 	len = 0;
