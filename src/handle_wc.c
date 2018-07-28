@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:30:15 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/28 19:19:54 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/07/28 19:22:15 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void		insert_wint(char *dst, wint_t src, int byte)
+static void	insert_wint(char *dst, wint_t src, int byte)
 {
 	if (byte == 1)
 		*(dst) = (char)src;
