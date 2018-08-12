@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:01:32 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/28 18:25:58 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/08/12 19:07:44 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,8 @@ int			read_type(const char **string, t_param *param)
 		**string != 'U' && **string != 'x' && **string != 'X' &&
 		**string != 'c' && **string != 'C')
 		return (-1);
-	if (**string == 'S' || **string == 'C')
+	if (**string == 'S' || **string == 'C' || **string == 'D' ||
+		**string == 'U' || **string == 'O')
 		param->specificator.l = 1;
 	param->type = **string;
 	++(*string);

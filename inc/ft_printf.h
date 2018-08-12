@@ -6,7 +6,7 @@
 /*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:46:39 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/28 17:31:11 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/08/12 21:12:57 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ int					handle_s(char **dst, va_list *args, t_param *param);
 int					handle_ls(char **dst, va_list *args, t_param *param);
 int					handle_c(char **dst, va_list *args, t_param *param);
 int					handle_lc(char **dst, va_list *args, t_param *param);
+int					handle_d(char **dst, va_list *args, t_param *param);
+int					handle_o(char **dst, va_list *args, t_param *param);
+int					handle_u(char **dst, va_list *args, t_param *param);
+int					handle_x(char **dst, va_list *args, t_param *param);
 
 int					get_length(const char *string);
 int					get_wlength(const wchar_t *wstring);
