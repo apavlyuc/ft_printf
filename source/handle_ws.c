@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:36:20 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 18:08:53 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/24 22:22:54 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static int		get_param_sl_len(wchar_t *str, t_param *p, int *sp, int *smb)
 	int			len;
 	int			bytes;
 
-	*smb = get_symbols_count(str, p->accuracy.accuracy);
+	*smb = get_symbols_count(str, p->accuracy);
 	bytes = get_bytes_in_wstr(str, *smb);
-	len = p->width.width < bytes ? bytes : p->width.width;
+	len = p->width < bytes ? bytes : p->width;
 	*sp = (len - bytes) > 0 ? (len - bytes) : 0;
 	return (len);
 }

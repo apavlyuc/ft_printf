@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:30:15 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 18:08:53 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/24 22:22:41 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	get_param_lc_len(wint_t c, t_param *param, int *spaces)
 	int		bytes;
 
 	bytes = get_bytes_in_wstr((const wchar_t *)(&c), 1);
-	len = param->width.width < bytes ? bytes : param->width.width;
+	len = param->width < bytes ? bytes : param->width;
 	*spaces = (len - bytes) > 0 ? (len - bytes) : 0;
 	return (len);
 }

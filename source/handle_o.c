@@ -6,33 +6,25 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 21:14:16 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 18:14:30 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/24 22:21:55 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 #include <stdlib.h>
 
-static unsigned long long	get_data(va_list *args, t_param *param, char *base)
+static unsigned long long	get_data(va_list *args, t_param *param)
 {
-	if (param->type == 'u')
-		base = "0123456789";
-	else if (param->type == 'o')
-		base = "01234567";
-	else if (param->type == 'x')
-		base = "0123456789abcdef";
-	else if (param->type == 'X')
-		base = "0123456789ABCDEF";
-	if (param->specificator.hh == 1)
+	if (param->specificator.hh)
 		return ((unsigned char)va_arg(*args, unsigned int));
-	else if (param->specificator.h == 1)
+	else if (param->specificator.h)
 		return ((unsigned short int)va_arg(*args, unsigned int));
-	else if (param->specificator.l == 1)
+	else if (param->specificator.l)
 		return ((unsigned long)va_arg(*args, unsigned long));
-	else if (param->specificator.ll == 1 ||
-			param->specificator.j == 1)
+	else if (param->specificator.ll ||
+			param->specificator.j)
 		return ((unsigned long long)va_arg(*args, unsigned long long));
-	else if (param->specificator.z == 1)
+	else if (param->specificator.z)
 		return (va_arg(*args, ssize_t));
 	else
 		return (va_arg(*args, unsigned int));
@@ -43,11 +35,11 @@ static int					get_param_o_len(t_param *param,
 {
 	int						ret;
 
-	info[0] = get_nlen(number);
-	info[0] = (number == 0 && !param->accuracy.accuracy) ? 0 : info[0];
-	ret = (param->width.width > info[0]) ? param->width.width : info[0];
-	info[0] = (param->accuracy.accuracy > info[0])
-		? param->accuracy.accuracy : info[0];
+	// info[0] = get_unlen(number);
+	info[0] = (number == 0 && !param->accuracy) ? 0 : info[0];
+	ret = (param->width > info[0]) ? param->width : info[0];
+	info[0] = (param->accuracy > info[0])
+		? param->accuracy : info[0];
 	ret = (ret > info[0]) ? (ret) : (info[0]);
 	info[2] = 0;
 	if ((number >= 0 && (param->flags.plus || param->flags.space))
@@ -58,7 +50,7 @@ static int					get_param_o_len(t_param *param,
 		ret = (info[0] > ret) ? info[0] : ret;
 		info[1] = (param->flags.minus) ? (0) : (ret - info[0]);
 	}
-	info[1] = (param->accuracy.accuracy == -1 &&
+	info[1] = (param->accuracy == -1 &&
 		param->flags.zero) ? 0 : info[1];
 	return (ret);
 }
@@ -68,9 +60,12 @@ int							handle_o(char **dst, va_list *args, t_param *param)
 	int						number;
 	int						ret;
 	int						info[3];
-	char					*base;
 
-	number = get_data(args, param, base);
+	(void)args;
+	(void)dst;
+	(void)info;
+	(void)get_param_o_len;
+	number = get_data(args, param);
 	ret = 0;
 	return (ret);
 }

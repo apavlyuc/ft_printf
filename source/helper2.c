@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 18:10:41 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 18:08:53 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/24 21:32:47 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,12 @@ int			get_number_len(long long int number)
 
 int			update_param(const char **string, va_list *args, t_param *param)
 {
-	int ret;
-
-	ret = 0;
 	init_param(param);
-	ret += read_flags(string, param);
-	ret += read_width(string, args, param);
-	ret += read_accuracy(string, args, param);
-	ret += read_specificator(string, param);
-	ret += read_type(string, param);
-	return (ret == 5 ? 5 : -1);
+	read_flags(string, param);
+	read_width(string, args, param);
+	read_accuracy(string, args, param);
+	read_specificator(string, param);
+	return (read_type(string, param));
 }
 
 void		init_param(t_param *param)
@@ -61,14 +57,13 @@ void		init_param(t_param *param)
 	param->flags.plus = 0;
 	param->flags.space = 0;
 	param->flags.zero = 0;
-	param->width.width = 0;
-	param->width.asterisk = 0;
-	param->accuracy.accuracy = -1;
-	param->accuracy.asterisk = 0;
+	param->width = 0;
+	param->accuracy = NO_PRECISION;
 	param->specificator.h = 0;
 	param->specificator.hh = 0;
 	param->specificator.j = 0;
 	param->specificator.l = 0;
 	param->specificator.ll = 0;
 	param->specificator.z = 0;
+	param->data.ull = 0;
 }

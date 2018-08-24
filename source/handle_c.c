@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:11:14 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 18:08:53 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/24 22:18:38 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int			get_param_c_len(t_param *param, int *spaces)
 {
 	int				ret;
 
-	*spaces = param->width.width > 1 ? (param->width.width - 1) : 0;
+	*spaces = param->width > 1 ? (param->width - 1) : 0;
 	ret = *spaces + 1;
 	return (ret);
 }

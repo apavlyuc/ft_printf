@@ -6,14 +6,13 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:01:32 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 18:08:53 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/24 22:16:47 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <ft_printf.h>
 
-int			read_flags(const char **string, t_param *param)
+void		read_flags(const char **string, t_param *param)
 {
 	char	mark;
 
@@ -36,52 +35,54 @@ int			read_flags(const char **string, t_param *param)
 		if (mark)
 			(*string)++;
 	}
-	return (1);
 }
 
-int			read_width(const char **string, va_list *args, t_param *param)
+void		read_width(const char **string, va_list *args, t_param *param)
 {
 	if (**string == '*')
 	{
-		param->width.asterisk = 1;
-		if ((param->width.width = va_arg(*args, int)) < 0)
+		if ((param->width = va_arg(*args, int)) < 0)
 		{
-			param->width.width *= -1;
+			param->width *= -1;
 			param->flags.minus = 1;
 		}
 		++(*string);
 	}
 	else
 	{
-		param->width.width = atoi(*string);
-		if (param->width.width || **string == '0')
-			*string += get_number_len(param->width.width);
+		while (**string >= '0' && **string <= '9')
+		{
+			param->width = param->width * 10 + (**string - '0');
+			++*string;
+		}
 	}
-	return (1);
 }
 
-int			read_accuracy(const char **string, va_list *args, t_param *param)
+void		read_accuracy(const char **string, va_list *args, t_param *param)
 {
 	if (**string == '.')
 	{
+		param->accuracy = 0;
 		++(*string);
 		if (**string == '*')
 		{
-			param->accuracy.asterisk = 1;
-			param->accuracy.accuracy = va_arg(*args, int);
+			param->accuracy = va_arg(*args, int);
+			if (param->accuracy < 0)
+				param->accuracy = -1;
 			++(*string);
 		}
 		else
 		{
-			param->accuracy.accuracy = atoi(*string);
-			if (param->accuracy.accuracy || **string == '0')
-				*string += get_number_len(param->accuracy.accuracy);
+			while (**string >= '0' && **string <= '9')
+			{
+				param->accuracy = param->accuracy * 10 + (**string - '0');
+				++*string;
+			}
 		}
 	}
-	return (1);
 }
 
-int			read_specificator(const char **string, t_param *param)
+void		read_specificator(const char **string, t_param *param)
 {
 	int		len;
 
@@ -105,7 +106,6 @@ int			read_specificator(const char **string, t_param *param)
 	else if (**string == 'j')
 		param->specificator.j = 1;
 	*string += len;
-	return (1);
 }
 
 int			read_type(const char **string, t_param *param)
@@ -114,12 +114,18 @@ int			read_type(const char **string, t_param *param)
 		**string != 'd' && **string != 'D' && **string != 'i' &&
 		**string != 'o' && **string != 'O' && **string != 'u' &&
 		**string != 'U' && **string != 'x' && **string != 'X' &&
-		**string != 'c' && **string != 'C')
+		**string != 'c' && **string != 'C' && **string != '%')
 		return (-1);
 	if (**string == 'S' || **string == 'C' || **string == 'D' ||
 		**string == 'U' || **string == 'O')
+	{
+		param->type = (**string + ('a' - 'A'));
 		param->specificator.l = 1;
-	param->type = **string;
+	}
+	else if (**string == 'i')
+		param->type = 'd';
+	else
+		param->type = **string;
 	++(*string);
 	return (1);
 }
