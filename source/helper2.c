@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 18:10:41 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 21:32:47 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/24 23:08:19 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,20 @@ void		init_param(t_param *param)
 	param->specificator.ll = 0;
 	param->specificator.z = 0;
 	param->data.ull = 0;
+}
+
+void		get_unsigned_arg(va_list *args, t_param *param)
+{
+	if (param->specificator.hh)
+		param->data.ull = (unsigned char)va_arg(*args, unsigned int);
+	else if (param->specificator.h)
+		param->data.ull = (unsigned short int)va_arg(*args, unsigned int);
+	else if (param->specificator.l)
+		param->data.ull = (unsigned long)va_arg(*args, unsigned long);
+	else if (param->specificator.ll || param->specificator.j)
+		param->data.ull = va_arg(*args, unsigned long long);
+	else if (param->specificator.z)
+		param->data.ull = va_arg(*args, size_t);
+	else
+		param->data.ull = va_arg(*args, unsigned int);
 }

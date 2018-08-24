@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:46:39 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 22:08:10 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/24 23:28:58 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ typedef union				u_data
 	t_ull					ull;
 	t_ll					ll;
 }							t_data;
+
+typedef struct				s_base
+{
+	int						base;
+	char const				*chars;
+}							t_base;
 
 typedef struct				s_flags
 {
@@ -85,9 +91,12 @@ int							handle_d(char **dst, va_list *args, t_param *param);
 int							handle_o(char **dst, va_list *args, t_param *param);
 int							handle_u(char **dst, va_list *args, t_param *param);
 int							handle_x(char **dst, va_list *args, t_param *param);
+int							handle_x_fill(char **dst, char const *tab,
+							t_param *param);
 int							handle_other(char **dst, va_list *args,
 							t_param *param);
 
+void						get_unsigned_arg(va_list *args, t_param *param);
 int							get_length(const char *string);
 int							get_wlength(const wchar_t *wstring);
 int							get_symbols_count(const wchar_t *string,
@@ -96,9 +105,12 @@ int							get_bytes_in_wstr(const wchar_t *wstring,
 							int count);
 int							get_text_len(const char *string);
 int							get_number_len(long long int number);
+int							get_number_base_len(t_ull number, int base);
 void						fill(char *dst, char c, int len);
 void						wchar_to_char(char **dst, wchar_t *src,
 							int lp, int ls);
 void						init_param(t_param *param);
+void						write_number_base(char *dst, size_t n,
+							t_ull num, t_base base);
 
 #endif
