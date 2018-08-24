@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 21:14:16 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 22:21:55 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/24 22:23:48 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static int					get_param_o_len(t_param *param,
 {
 	int						ret;
 
-	// info[0] = get_unlen(number);
 	info[0] = (number == 0 && !param->accuracy) ? 0 : info[0];
 	ret = (param->width > info[0]) ? param->width : info[0];
 	info[0] = (param->accuracy > info[0])
