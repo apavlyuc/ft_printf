@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   handle_s.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:58:25 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/28 17:27:51 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/08/24 18:08:53 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "inc/ft_printf.h"
+#include <ft_printf.h>
 
 static void	insert(char **dst, char *src, t_param *param)
 {

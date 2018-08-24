@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:50:21 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/21 14:54:24 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/08/24 18:08:53 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "inc/ft_printf.h"
+#include <ft_printf.h>
 
 int			ft_printf(const char *string, ...)
 {

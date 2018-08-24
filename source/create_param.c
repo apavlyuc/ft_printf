@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_param.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:49:26 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/12 21:13:28 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/08/24 18:10:29 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
+#include <ft_printf.h>
 
 int			create_param(char **dst, va_list *args, t_param *param)
 {
@@ -29,5 +29,7 @@ int			create_param(char **dst, va_list *args, t_param *param)
 		ret = handle_u(dst, args, param);
 	else if (param->type == 'x' || param->type == 'X')
 		ret = handle_x(dst, args, param);
+	else
+		ret = -1;
 	return (ret);
 }

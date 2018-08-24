@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 19:09:56 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/12 22:21:43 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/08/24 18:15:33 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include <ft_printf.h>
 #include <stdlib.h>
 
 static int			get_nlen(long long num)
@@ -52,17 +52,20 @@ static int			get_param_d_len(t_param *param, long long number, int *info)
 	info[0] = get_nlen(number);
 	info[0] = (number == 0 && !param->accuracy.accuracy) ? 0 : info[0];
 	ret = (param->width.width > info[0]) ? param->width.width : info[0];
-	info[0] = (param->accuracy.accuracy > info[0]) ? param->accuracy.accuracy : info[0];
+	info[0] = (param->accuracy.accuracy > info[0])
+		? param->accuracy.accuracy : info[0];
 	ret = (ret > info[0]) ? (ret) : (info[0]);
 	info[2] = 0;
-	if ((number >= 0 && (param->flags.plus || param->flags.space)) || number < 0)
+	if ((number >= 0 && (param->flags.plus || param->flags.space))
+		|| number < 0)
 	{
 		info[2] = 1;
 		++(info[0]);
 		ret = (info[0] > ret) ? info[0] : ret;
 		info[1] = (param->flags.minus) ? (0) : (ret - info[0]);
 	}
-	info[1] = (param->accuracy.accuracy == -1 && param->flags.zero) ? 0 : info[1];
+	info[1] = (param->accuracy.accuracy == -1 && param->flags.zero)
+		? 0 : info[1];
 	return (ret);
 }
 

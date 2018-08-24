@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   handle_ws.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:36:20 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/28 19:05:00 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/08/24 18:08:53 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include "inc/ft_printf.h"
+#include <ft_printf.h>
 
 static void		insert_wchar(char *dst, wchar_t src, int byte)
 {

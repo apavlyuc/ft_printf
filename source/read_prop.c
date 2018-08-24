@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   read_prop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:01:32 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/12 19:07:44 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/08/24 18:08:53 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "inc/ft_printf.h"
+#include <ft_printf.h>
 
 int			read_flags(const char **string, t_param *param)
 {

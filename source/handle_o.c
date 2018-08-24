@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   handle_o.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 21:14:16 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/12 22:24:16 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/08/24 18:14:30 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include <ft_printf.h>
 #include <stdlib.h>
 
 static unsigned long long	get_data(va_list *args, t_param *param, char *base)
 {
 	if (param->type == 'u')
 		base = "0123456789";
-	else if (param->type = 'o')
+	else if (param->type == 'o')
 		base = "01234567";
 	else if (param->type == 'x')
 		base = "0123456789abcdef";
@@ -38,24 +38,28 @@ static unsigned long long	get_data(va_list *args, t_param *param, char *base)
 		return (va_arg(*args, unsigned int));
 }
 
-static int			get_param_o_len(t_param *param, long long number, int *info)
+static int					get_param_o_len(t_param *param,
+							long long number, int *info)
 {
-	int				ret;
+	int						ret;
 
 	info[0] = get_nlen(number);
 	info[0] = (number == 0 && !param->accuracy.accuracy) ? 0 : info[0];
 	ret = (param->width.width > info[0]) ? param->width.width : info[0];
-	info[0] = (param->accuracy.accuracy > info[0]) ? param->accuracy.accuracy : info[0];
+	info[0] = (param->accuracy.accuracy > info[0])
+		? param->accuracy.accuracy : info[0];
 	ret = (ret > info[0]) ? (ret) : (info[0]);
 	info[2] = 0;
-	if ((number >= 0 && (param->flags.plus || param->flags.space)) || number < 0)
+	if ((number >= 0 && (param->flags.plus || param->flags.space))
+		|| number < 0)
 	{
 		info[2] = 1;
 		++(info[0]);
 		ret = (info[0] > ret) ? info[0] : ret;
 		info[1] = (param->flags.minus) ? (0) : (ret - info[0]);
 	}
-	info[1] = (param->accuracy.accuracy == -1 && param->flags.zero) ? 0 : info[1];
+	info[1] = (param->accuracy.accuracy == -1 &&
+		param->flags.zero) ? 0 : info[1];
 	return (ret);
 }
 

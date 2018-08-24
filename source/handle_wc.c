@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_wc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:30:15 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/28 19:22:15 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/08/24 18:08:53 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
+#include <ft_printf.h>
 #include <stdlib.h>
 #include <unistd.h>
 

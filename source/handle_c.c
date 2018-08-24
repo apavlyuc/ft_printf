@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_c.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:11:14 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/07/28 18:43:49 by apavlyuc         ###   ########.fr       */
+/*   Updated: 2018/08/24 18:08:53 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
+#include <ft_printf.h>
 #include <stdlib.h>
 
 static int			get_param_c_len(t_param *param, int *spaces)
