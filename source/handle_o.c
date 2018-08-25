@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 21:15:15 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/25 17:05:41 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 17:11:28 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void			get_o_data(t_param *param, size_t *s_pos, size_t *len,
 		*s_pos = (0);
 }
 
-int					handle_o_fill(char **dst, char const *tab, t_param *param)
+static int			handle_o_fill(char **dst, char const *tab, t_param *param)
 {
 	char			*wnb;
 	size_t			s_pos;

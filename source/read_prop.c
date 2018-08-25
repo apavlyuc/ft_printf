@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:01:32 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 22:16:47 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 17:26:15 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,20 +91,20 @@ void		read_specificator(const char **string, t_param *param)
 		**string == 'z')
 		len = 1;
 	if (**string == 'h' && *(*string + 1) == 'h' && (len = 2))
-		param->specificator.hh = 1;
+		param->specificator = CHAR_SIZE;
 	else if (**string == 'l' && *(*string + 1) == 'l')
 	{
-		param->specificator.ll = 1;
+		param->specificator = LONG_LONG_SIZE;
 		len = 2;
 	}
 	else if (**string == 'h')
-		param->specificator.h = 1;
+		param->specificator = SHORT_SIZE;
 	else if (**string == 'l')
-		param->specificator.l = 1;
+		param->specificator = LONG_SIZE;
 	else if (**string == 'z')
-		param->specificator.z = 1;
+		param->specificator = SIZE_SIZE;
 	else if (**string == 'j')
-		param->specificator.j = 1;
+		param->specificator = LONG_LONG_SIZE;
 	*string += len;
 }
 
@@ -120,7 +120,7 @@ int			read_type(const char **string, t_param *param)
 		**string == 'U' || **string == 'O')
 	{
 		param->type = (**string + ('a' - 'A'));
-		param->specificator.l = 1;
+		param->specificator = LONG_SIZE;
 	}
 	else if (**string == 'i')
 		param->type = 'd';

@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:46:39 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 23:28:58 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 17:31:11 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,20 @@ typedef struct				s_flags
 	char					zero;
 }							t_flags;
 
-typedef struct				s_specificator
-{
-	char					h;
-	char					hh;
-	char					l;
-	char					ll;
-	char					j;
-	char					z;
-}							t_specificator;
+# define NO_SIZE (0)
+# define CHAR_SIZE (1)
+# define SHORT_SIZE (2)
+# define LONG_SIZE (4)
+# define LONG_LONG_SIZE (8)
+# define SIZE_SIZE (16)
 
 typedef struct				s_param
 {
 	t_flags					flags;
 	long int				width;
 	long int				accuracy;
-	t_specificator			specificator;
+	unsigned int			specificator:5;
+	unsigned int			is_ptr:1;
 	char					type;
 	t_data					data;
 }							t_param;

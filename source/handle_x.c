@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 21:15:15 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/25 16:20:10 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 17:42:25 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void			get_x_data(t_param *param, size_t *s_pos, size_t *len,
 {
 	if (param->accuracy >= 0 && *num_len < (size_t)param->accuracy)
 		*num_len = param->accuracy;
-	if (param->flags.hash && param->data.ull > 0)
+	if (param->flags.hash && (param->data.ull > 0 || param->is_ptr))
 		*num_len += 2;
 	if (param->accuracy == 0 && param->data.ull == 0)
 		*num_len = 0;
@@ -46,7 +46,7 @@ int					handle_x_fill(char **dst, char const *tab, t_param *param)
 		param->accuracy == -1 ? '0' : ' '), len);
 	wnb = (param->flags.minus) ? (*dst + num_len) : (*dst + len);
 	write_number_base(wnb, num_len, param->data.ull, (t_base){base, tab});
-	if (param->flags.hash && param->data.ull > 0)
+	if (param->flags.hash && (param->data.ull > 0 || param->is_ptr))
 		(*dst)[s_pos] = param->type;
 	return (len);
 }

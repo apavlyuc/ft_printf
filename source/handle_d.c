@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 19:09:56 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 22:19:00 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 17:20:05 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,15 @@ static int			get_nlen(long long num)
 
 static long long	get_data(va_list *args, t_param *param)
 {
-	if (param->specificator.hh == 1)
+	if (param->specificator == CHAR_SIZE)
 		return ((signed char)va_arg(*args, int));
-	else if (param->specificator.h == 1)
+	else if (param->specificator == SHORT_SIZE)
 		return ((signed short int)va_arg(*args, int));
-	else if (param->specificator.l == 1)
+	else if (param->specificator == LONG_SIZE)
 		return (va_arg(*args, long));
-	else if (param->specificator.ll == 1 ||
-			param->specificator.j)
+	else if (param->specificator == LONG_LONG_SIZE)
 		return (va_arg(*args, long long));
-	else if (param->specificator.z == 1)
+	else if (param->specificator == SIZE_SIZE)
 		return (va_arg(*args, ssize_t));
 	else
 		return (va_arg(*args, int));

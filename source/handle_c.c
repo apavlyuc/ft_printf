@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:11:14 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 22:18:38 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 17:19:09 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int					handle_c(char **dst, va_list *args, t_param *param)
 	int				spaces;
 	int				len;
 
-	if (param->specificator.l == 1)
+	if (param->specificator == LONG_SIZE)
 		return (handle_lc(dst, args, param));
 	c = (unsigned char)va_arg(*args, int);
 	len = get_param_c_len(param, &spaces);

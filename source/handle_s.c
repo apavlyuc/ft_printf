@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:58:25 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 22:04:19 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 17:20:41 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			handle_s(char **dst, va_list *args, t_param *param)
 	char	*string;
 	int		len;
 
-	if (param->specificator.l == 1)
+	if (param->specificator == LONG_SIZE)
 		return (handle_ls(dst, args, param));
 	string = va_arg(*args, char*);
 	string = string == NULL ? (char *)"(null)" : string;

@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 22:03:37 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/24 23:25:11 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 17:31:31 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ int			handle_other(char **dst, va_list *args, t_param *param)
 	}
 	else
 	{
+		param->is_ptr = 1;
 		param->data.ull = (t_ull)va_arg(*args, void*);
 		param->flags.hash = 1;
 		param->type = 'x';
-		param->specificator.ll = 1;
+		param->specificator = LONG_LONG_SIZE;
 		len = handle_x_fill(dst, "0123456789abcdef", param);
 	}
 	return (len);

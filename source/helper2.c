@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 18:10:41 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 23:08:19 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 17:31:23 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,22 @@ void		init_param(t_param *param)
 	param->flags.zero = 0;
 	param->width = 0;
 	param->accuracy = NO_PRECISION;
-	param->specificator.h = 0;
-	param->specificator.hh = 0;
-	param->specificator.j = 0;
-	param->specificator.l = 0;
-	param->specificator.ll = 0;
-	param->specificator.z = 0;
+	param->specificator = NO_SIZE;
+	param->is_ptr = 0;
 	param->data.ull = 0;
 }
 
 void		get_unsigned_arg(va_list *args, t_param *param)
 {
-	if (param->specificator.hh)
+	if (param->specificator == CHAR_SIZE)
 		param->data.ull = (unsigned char)va_arg(*args, unsigned int);
-	else if (param->specificator.h)
+	else if (param->specificator == SHORT_SIZE)
 		param->data.ull = (unsigned short int)va_arg(*args, unsigned int);
-	else if (param->specificator.l)
+	else if (param->specificator == LONG_SIZE)
 		param->data.ull = (unsigned long)va_arg(*args, unsigned long);
-	else if (param->specificator.ll || param->specificator.j)
+	else if (param->specificator == LONG_LONG_SIZE)
 		param->data.ull = va_arg(*args, unsigned long long);
-	else if (param->specificator.z)
+	else if (param->specificator == SIZE_SIZE)
 		param->data.ull = va_arg(*args, size_t);
 	else
 		param->data.ull = va_arg(*args, unsigned int);
