@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_prop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:01:32 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/25 17:26:15 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 18:35:04 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ int			read_type(const char **string, t_param *param)
 		**string != 'd' && **string != 'D' && **string != 'i' &&
 		**string != 'o' && **string != 'O' && **string != 'u' &&
 		**string != 'U' && **string != 'x' && **string != 'X' &&
-		**string != 'c' && **string != 'C' && **string != '%')
+		**string != 'c' && **string != 'C' && **string != '%' &&
+		**string != 'b')
 		return (-1);
 	if (**string == 'S' || **string == 'C' || **string == 'D' ||
 		**string == 'U' || **string == 'O')

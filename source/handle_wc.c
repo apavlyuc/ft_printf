@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_wc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:30:15 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 22:22:41 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 21:10:06 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	insert_wint(char *dst, wint_t src, int byte)
 		*(dst + 2) = (char)(((src >> 6) & 0x3F) + 0x80);
 		*(dst + 3) = (char)((src & 0x3F) + 0x80);
 	}
-	write(1, dst, byte);
 }
 
 static int	get_param_lc_len(wint_t c, t_param *param, int *spaces)
@@ -44,19 +43,20 @@ static int	get_param_lc_len(wint_t c, t_param *param, int *spaces)
 	int		len;
 	int		bytes;
 
-	bytes = get_bytes_in_wstr((const wchar_t *)(&c), 1);
+	if (c == 0)
+		bytes = 1;
+	else
+		bytes = get_bytes_in_wstr((const wchar_t *)(&c), 1);
 	len = param->width < bytes ? bytes : param->width;
 	*spaces = (len - bytes) > 0 ? (len - bytes) : 0;
 	return (len);
 }
 
-static void	insert(char *dst, wint_t c, int spaces)
+static void	insert(char *dst, wint_t c)
 {
 	int		i;
 
 	i = 0;
-	while (spaces-- > 0)
-		write(1, " ", 1);
 	if (c <= 0x7F)
 		i = 1;
 	else if (c <= 0x7FF)
@@ -68,11 +68,9 @@ static void	insert(char *dst, wint_t c, int spaces)
 	insert_wint(dst, c, i);
 }
 
-static void	rinsert(char *dst, wint_t c, int spaces)
+static void	rinsert(char *dst, wint_t c)
 {
-	insert(dst, c, 0);
-	while (spaces-- > 0)
-		write(1, " ", 1);
+	insert(dst, c);
 }
 
 int			handle_lc(char **dst, va_list *args, t_param *param)
@@ -86,9 +84,8 @@ int			handle_lc(char **dst, va_list *args, t_param *param)
 	*dst = (char *)malloc(sizeof(char) * (len + 1));
 	fill(*dst, ' ', len);
 	if (param->flags.minus == 0)
-		insert(*dst, c, spaces);
+		insert(*dst, c);
 	else
-		rinsert(*dst, c, spaces);
-	**dst = '\0';
+		rinsert(*dst, c);
 	return (len);
 }

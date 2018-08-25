@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_param.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:49:26 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 22:20:14 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 18:35:38 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int			create_param(char **dst, va_list *args, t_param *param)
 		ret = handle_u(dst, args, param);
 	else if (param->type == 'x' || param->type == 'X')
 		ret = handle_x(dst, args, param);
+	else if (param->type == 'b')
+		ret = handle_b(dst, args, param);
 	else
 		ret = handle_other(dst, args, param);
 	return (ret);

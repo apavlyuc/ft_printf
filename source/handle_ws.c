@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_ws.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 15:36:20 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 22:22:54 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 21:06:13 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void		insert_wchar(char *dst, wchar_t src, int byte)
 		*(dst + 2) = (char)(((src >> 6) & 0x3F) + 0x80);
 		*(dst + 3) = (char)((src & 0x3F) + 0x80);
 	}
-	write(1, dst, byte);
 }
 
 static int		get_param_sl_len(wchar_t *str, t_param *p, int *sp, int *smb)
@@ -56,8 +55,7 @@ static void		insert(char *dst, wchar_t *src, int spaces, int symbols)
 {
 	int			i;
 
-	while (spaces-- > 0)
-		write(1, " ", 1);
+	(void)spaces;
 	while (*src && symbols > 0)
 	{
 		if (*src <= 0x7F)
@@ -77,9 +75,8 @@ static void		insert(char *dst, wchar_t *src, int spaces, int symbols)
 
 static void		rinsert(char *dst, wchar_t *src, int spaces, int symbols)
 {
+	(void)spaces;
 	insert(dst, src, 0, symbols);
-	while (spaces-- > 0)
-		write(1, " ", 1);
 }
 
 int				handle_ls(char **dst, va_list *args, t_param *param)
@@ -95,9 +92,8 @@ int				handle_ls(char **dst, va_list *args, t_param *param)
 	*dst = (char *)malloc(sizeof(char) * (len + 1));
 	fill(*dst, ' ', len);
 	if (param->flags.minus == 0)
-		insert(*dst, string, spaces, symbols);
+		insert((*dst + spaces), string, spaces, symbols);
 	else
 		rinsert(*dst, string, spaces, symbols);
-	**dst = '\0';
 	return (len);
 }

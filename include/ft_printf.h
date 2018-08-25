@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apavlyuc <apavlyuc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 14:46:39 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/25 17:31:11 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 20:02:09 by apavlyuc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int							handle_lc(char **dst, va_list *args,
 							t_param *param);
 int							handle_d(char **dst, va_list *args, t_param *param);
 int							handle_o(char **dst, va_list *args, t_param *param);
+int							handle_b(char **dst, va_list *args, t_param *param);
 int							handle_u(char **dst, va_list *args, t_param *param);
 int							handle_x(char **dst, va_list *args, t_param *param);
 int							handle_x_fill(char **dst, char const *tab,
