@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 21:15:15 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/24 23:49:09 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 15:29:26 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,19 @@ int					handle_x_fill(char **dst, char const *tab, t_param *param)
 
 	base = get_length(tab);
 	num_len = get_number_base_len(param->data.ull, base);
-	if (param->flags.hash)
+	if (param->accuracy >= 0 && num_len < (size_t)param->accuracy)
+		num_len = param->accuracy;
+	if (param->flags.hash && param->data.ull > 0)
 		num_len += 2;
 	len = param->width;
 	if (len < num_len)
 		len = num_len;
 	*dst = malloc(sizeof(char) * (len + 1));
-	fill(*dst, (param->flags.zero ? '0' : ' '), len);
+	fill(*dst, (param->flags.zero && !param->flags.minus ? '0' : ' '), len);
 	wnb = (param->flags.minus) ? (*dst + num_len) : (*dst + len);
 	s_pos = (param->flags.minus) ? (1) : (len - num_len + 1);
 	write_number_base(wnb, num_len, param->data.ull, (t_base){base, tab});
-	if (param->flags.hash)
+	if (param->flags.hash && param->data.ull > 0)
 		(*dst)[s_pos] = param->type;
 	return (len);
 }
