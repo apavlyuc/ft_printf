@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 21:15:15 by apavlyuc          #+#    #+#             */
-/*   Updated: 2018/08/25 17:42:25 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/25 17:46:30 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void			get_x_data(t_param *param, size_t *s_pos, size_t *len,
 		*num_len = param->accuracy;
 	if (param->flags.hash && (param->data.ull > 0 || param->is_ptr))
 		*num_len += 2;
-	if (param->accuracy == 0 && param->data.ull == 0)
+	else if (param->accuracy == 0 && param->data.ull == 0)
 		*num_len = 0;
 	*len = param->width;
 	if (*len < *num_len)

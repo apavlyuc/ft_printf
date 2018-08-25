@@ -3,4 +3,4 @@ build/
 *.o
 *.a
 *.so
-.vscode/
+main.c
