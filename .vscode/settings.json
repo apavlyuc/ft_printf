@@ -1,2 +1,28 @@
 {
+    "editor.rulers": [
+		80
+	],
+
+    "editor.detectIndentation": false,
+    "editor.autoIndent": false,
+    "editor.insertSpaces": false,
+    "editor.useTabStops": true,
+	"editor.tabSize": 4,
+
+	"editor.formatOnPaste": false,
+	"editor.formatOnSave": false,
+	"editor.formatOnType": false,
+
+    "files.trimTrailingWhitespace": true,
+
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/build": true,
+        "**/*.[ao]": true,
+		"**/test*": true
+	}
 }
